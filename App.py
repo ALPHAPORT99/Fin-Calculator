@@ -2,10 +2,6 @@ import streamlit as st
 import numpy as np
 import math
 import sympy as sp  
-####################################
-# Helper Functions 
-# (Time Value, Bonds, Capital Budgeting, Stock Valuation)
-####################################
 
 def future_value(present_value, r, n):
     return present_value * (1 + r)**n
@@ -76,7 +72,6 @@ def discounted_payback_period(cash_flows, r):
             return i
     return None
 
-# ---- BOND Helpers ----
 def bond_price_coupon(face_value, coupon_rate, years_to_maturity, coupons_per_year, ytm_annual):
     C = (coupon_rate * face_value) / coupons_per_year
     r = ytm_annual / coupons_per_year
@@ -105,7 +100,6 @@ def bond_coupon_rate(bond_price, face_value, annual_ytm, years_to_maturity, coup
     c = numerator / denominator
     return c
 
-# ---- STOCK Valuation Helpers ----
 def stock_price_constant_dividend(dividend, r):
     # P0 = D / r
     return dividend / r
@@ -184,11 +178,6 @@ def after_tax_cost_of_debt(rd, tax_rate):
 def future_value(present_value, r, n):
     return present_value * (1 + r)**n
 
-
-####################################
-# App Layout with Categorization
-####################################
-
 st.title("Finance Formulas App")
 
 st.write("""
@@ -247,10 +236,6 @@ selected_category = st.selectbox("Select a Category:", list(categories.keys()))
 selected_formula = st.selectbox("Select a Formula:", categories[selected_category])
 
 st.write("---")
-
-####################################
-# Time Value of Money
-####################################
 
 if selected_formula == "Future Value (FV)":
     st.subheader("Future Value")
@@ -334,10 +319,6 @@ elif selected_formula == "Growing Perpetuity":
             result = growing_perpetuity_pv(C, r, g)
             st.success(f"PV of Growing Perpetuity = {result:,.6f}")
 
-####################################
-# Bond
-####################################
-
 elif selected_formula == "Bond Price (Coupon)":
     st.subheader("Bond Price (Coupon Bond)")
     st.latex(r"""
@@ -385,9 +366,6 @@ elif selected_formula == "Bond Coupon Rate":
             st.write(f"Annual Coupon Rate (decimal) = {c:.6f}")
             st.success(f"Annual Coupon Rate (percent) = {c*100:.4f}%")
 
-####################################
-# Capital Budgeting
-####################################
 
 elif selected_formula == "Net Present Value (NPV)":
     st.subheader("Net Present Value")
@@ -473,9 +451,6 @@ elif selected_formula == "Discounted Payback Period":
         else:
             st.warning("The present value of cash flows never recovers the initial cost.")
 
-####################################
-# Stock Valuation
-####################################
 
 elif selected_formula == "Stock - Constant Dividend Price":
     st.subheader("Stock Price (Constant Dividend)")
@@ -646,9 +621,6 @@ elif selected_formula == "Expected Return":
             er = expected_return(probabilities, returns)
             st.success(f"Expected Return = {er:.4f}")
 
-####################################
-# Average Return Calculation
-####################################
 
 elif selected_formula == "Average Return":
     st.subheader("Average Return Calculation")
@@ -694,9 +666,7 @@ elif selected_formula == "WACC Calculation":
         wacc_value = wacc(equity, debt, re, rd, tax_rate)
         st.success(f"WACC = {wacc_value:.4f}")
 
-####################################
-# Cost of Equity Calculation
-####################################
+
 
 elif selected_formula == "Cost of Equity (CAPM)":
     st.subheader("Cost of Equity Calculation using CAPM")
@@ -708,9 +678,6 @@ elif selected_formula == "Cost of Equity (CAPM)":
         cost_equity = cost_of_equity(rf, beta, rm)
         st.success(f"Cost of Equity = {cost_equity:.4f}")
 
-####################################
-# After-Tax Cost of Debt Calculation
-####################################
 
 elif selected_formula == "After-Tax Cost of Debt":
     st.subheader("After-Tax Cost of Debt Calculation")
@@ -727,7 +694,7 @@ st.markdown("Enter any mathematical expression. For example: `sin(pi/2) + log(10
             "This calculator leverages **Sympy** to parse and evaluate your expression, "
             "supporting a wide range of functions, constants, and even symbolic operations.")
 
-# Text input for the user to enter an expression
+
 expression = st.text_input("Expression", value="sin(pi/2) + log(10)")
 
 if st.button("Evaluate Expression"):
