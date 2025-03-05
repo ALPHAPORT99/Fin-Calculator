@@ -98,3 +98,22 @@ def bond_coupon_rate(bond_price, face_value, annual_ytm, years_to_maturity, coup
         return None
     c = numerator / denominator
     return c
+
+st.set_page_config(page_title="Finance Formulas App", layout="wide")
+st.title("Finance Formulas App")
+st.write("Use the selectors below to navigate formulas by category.")
+
+categories = {
+    "Time Value of Money": [
+        "Future Value (FV)", "Present Value (PV)", "Annuity (PV)", "Annuity (FV)", "Growing Annuity (PV)", "Perpetuity", "Growing Perpetuity"
+    ],
+    "Bond": ["Bond Price (Coupon)", "Bond YTM (Coupon)", "Bond Coupon Rate"],
+    "Capital Budgeting": ["Net Present Value (NPV)", "Internal Rate of Return (IRR)", "Payback Period", "Discounted Payback Period"],
+    "Stock Valuation": ["Stock - Constant Dividend Price", "Stock - Constant Growth Dividend Price (Gordon Growth)", "Stock - Required Return (Gordon Growth)", "Stock - Non-Constant Growth Dividend Price", "Corporate Value (FCF) Model", "Stock Price from PE Multiple", "Free Cash Flow (FCF)"],
+    "Risk Valuation": ["Expected Return", "Average Return", "CAPM Expected Return", "Beta Calculation"],
+    "Cost of Capital": ["WACC Calculation", "Cost of Equity (CAPM)", "After-Tax Cost of Debt"]
+}
+
+selected_category = st.selectbox("Select a Category:", list(categories.keys()))
+selected_formula = st.selectbox("Select a Formula:", categories[selected_category])
+st.write("---")
