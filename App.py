@@ -104,9 +104,7 @@ st.title("Finance Formulas App")
 st.write("Use the selectors below to navigate formulas by category.")
 
 categories = {
-    "Time Value of Money": [
-        "Future Value (FV)", "Present Value (PV)", "Annuity (PV)", "Annuity (FV)", "Growing Annuity (PV)", "Perpetuity", "Growing Perpetuity"
-    ],
+    "Time Value of Money": ["Future Value (FV)", "Present Value (PV)", "Annuity (PV)", "Annuity (FV)", "Growing Annuity (PV)", "Perpetuity", "Growing Perpetuity"],
     "Bond": ["Bond Price (Coupon)", "Bond YTM (Coupon)", "Bond Coupon Rate"],
     "Capital Budgeting": ["Net Present Value (NPV)", "Internal Rate of Return (IRR)", "Payback Period", "Discounted Payback Period"],
     "Stock Valuation": ["Stock - Constant Dividend Price", "Stock - Constant Growth Dividend Price (Gordon Growth)", "Stock - Required Return (Gordon Growth)", "Stock - Non-Constant Growth Dividend Price", "Corporate Value (FCF) Model", "Stock Price from PE Multiple", "Free Cash Flow (FCF)"],
@@ -117,3 +115,7 @@ categories = {
 selected_category = st.selectbox("Select a Category:", list(categories.keys()))
 selected_formula = st.selectbox("Select a Formula:", categories[selected_category])
 st.write("---")
+
+if st.button("Calculate"):
+    st.write(f"Selected formula: {selected_formula}")
+    st.success("Feature implementation coming soon!")
